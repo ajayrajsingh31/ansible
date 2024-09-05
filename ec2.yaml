@@ -19,7 +19,7 @@
 
     - name: Install dependencies in virtual environment
       shell: |
-        source /tmp/myenv/bin/activate
+        . /tmp/myenv/bin/activate
         pip install {{ item }}
       loop:
        - boto3
