@@ -1,4 +1,3 @@
-
 ---
 - name: Provisioning a new EC2 instance and security group
   hosts: localhost
@@ -16,7 +15,7 @@
         msg: "Using Python {{ ansible_python_version }}"
               
     - name: Install dependencies
-      shell: "/usr/lib/python3 -m pip install {{ item }}"
+      shell: "/usr/bin/python3.10 -m pip install {{ item }}"
       loop:
        - boto3
        - botocore
@@ -82,5 +81,5 @@
           sudo apt install docker.io -y
           sudo systemctl start docker
           sudo systemctl enable docker
-          sudo docker run -d --name 2048 -p 3000:3000 ajayrajsingh31/2048:latest
+          sudo docker run -d --name 2048 -p 3000:3000 sevenajay/2048:latest
       register: ec2
