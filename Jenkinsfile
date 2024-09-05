@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools{
+    tools {
         ansible 'ansible'
     }
     stages {
@@ -9,21 +9,30 @@ pipeline {
                 cleanWs()
             }
         }
-        stage('checkout'){
-            steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/ANSIBLE.git'
+        stage('checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ajayrajsingh31/ansible.git'
             }
         }
-        stage('TRIVY FS SCAN') {
+        stage('Setup Virtual Environment') {
             steps {
-                sh "trivy fs . > trivyfs.txt"
+                sh 'python3 -m venv venv'
             }
-        }    
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                . venv/bin/activate
+                pip install --upgrade requests==2.20.1
+                '''
+            }
+        }
         stage('ansible provision') {
-          steps {
-             // To suppress warnings when you execute the playbook    
-             sh "pip install --upgrade requests==2.20.1"
-             ansiblePlaybook playbook: 'ec2.yaml' 
+            steps {
+                sh '''
+                . venv/bin/activate
+                ansible-playbook ec2.yaml
+                '''
             }
         }
     }
