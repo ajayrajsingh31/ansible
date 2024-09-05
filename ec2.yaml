@@ -82,5 +82,3 @@
           sudo systemctl enable docker
           sudo docker run -d --name 2048 -p 3000:3000 ajayrajsingh31/2048:latest
       register: ec2
-
-has context menu
