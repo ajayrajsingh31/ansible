@@ -14,8 +14,13 @@
       debug:
         msg: "Using Python {{ ansible_python_version }}"
               
-    - name: Install dependencies
-      shell: "/usr/bin/python3 -m pip install {{ item }}"
+    - name: Create a virtual environment
+      command: python3 -m venv /tmp/myenv
+
+    - name: Install dependencies in virtual environment
+      shell: |
+        source /tmp/myenv/bin/activate
+        pip install {{ item }}
       loop:
        - boto3
        - botocore
