@@ -15,16 +15,16 @@
         msg: "Using Python {{ ansible_python_version }}"
               
     - name: Install dependencies
-      shell: "/usr/bin/python3.10 -m pip install {{ item }}"
+      shell: "/usr/bin/python3 -m pip install {{ item }}"
       loop:
        - boto3
        - botocore
 
   vars:
-    ansible_python_interpreter: /usr/bin/python3.10
-    keypair: Mumbai
+    ansible_python_interpreter: /usr/bin/python3
+    keypair: purplehaze
     instance_type: t2.micro
-    image_id: ami-0f5ee92e2d63afc18
+    image_id: ami-0522ab6e1ddcc7055
     wait: yes
     group: webserver
     count: 1
