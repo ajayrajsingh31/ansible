@@ -4,29 +4,23 @@
   connection: local
   gather_facts: False
   tags: provisioning
-
+ 
   pre_tasks:
-
     - name: Gather facts
       setup:
-            
     - name: Print python version
       debug:
         msg: "Using Python {{ ansible_python_version }}"
-              
-    - name: Create a virtual environment
-      command: python3 -m venv /tmp/myenv
-
-    - name: Install dependencies in virtual environment
+    - name: Install dependencies
       shell: |
-        . /tmp/myenv/bin/activate
+        . /var/lib/jenkins/workspace/ansible/venv/bin/activate
         pip install {{ item }}
       loop:
        - boto3
        - botocore
-
+ 
   vars:
-    ansible_python_interpreter: /usr/bin/python3
+    ansible_python_interpreter: /var/lib/jenkins/workspace/ansible/venv/bin/python
     keypair: purplehaze
     instance_type: t2.micro
     image_id: ami-0522ab6e1ddcc7055
@@ -36,8 +30,8 @@
     region: ap-south-1
     security_group: ec2-security-group
     tag_name:
-      Name: Aj-ec2   
-
+      Name: Ansible
+ 
   tasks:
     - name: Create a security group
       amazon.aws.ec2_group:
@@ -69,7 +63,7 @@
           - proto: all
             cidr_ip: 0.0.0.0/0   
       register: basic_firewall
-
+ 
     - name: Launch the new EC2 Instance
       amazon.aws.ec2_instance:
         security_group: "{{ security_group }}"
@@ -88,3 +82,5 @@
           sudo systemctl enable docker
           sudo docker run -d --name 2048 -p 3000:3000 ajayrajsingh31/2048:latest
       register: ec2
+
+has context menu
