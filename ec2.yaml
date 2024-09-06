@@ -21,7 +21,7 @@
  
   vars:
     ansible_python_interpreter: /var/lib/jenkins/workspace/ansible/venv/bin/python
-    keypair: purplehaze
+    keypair: Mumbai
     instance_type: t2.micro
     image_id: ami-0522ab6e1ddcc7055
     wait: yes
@@ -80,5 +80,5 @@
           sudo apt install docker.io -y
           sudo systemctl start docker
           sudo systemctl enable docker
-          sudo docker run -d --name django -p 3000:3000 ajayrajsingh31/django:latest
+          sudo docker run -d --name 2048 -p 3000:3000 ajayrajsingh31/2048:latest
       register: ec2
