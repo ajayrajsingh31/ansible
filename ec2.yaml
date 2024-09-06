@@ -48,8 +48,8 @@
             to_port: 8080
             cidr_ip: 0.0.0.0/0
           - proto: tcp
-            from_port: 8000
-            to_port: 8000
+            from_port: 3000
+            to_port: 3000
             cidr_ip: 0.0.0.0/0  
           - proto: tcp
             from_port: 80
@@ -80,5 +80,5 @@
           sudo apt install docker.io -y
           sudo systemctl start docker
           sudo systemctl enable docker
-          sudo docker run -d --name django -p 8000:8000 ajayrajsingh31/django:latest
+          sudo docker run -d --name django -p 3000:3000 ajayrajsingh31/django:latest
       register: ec2
