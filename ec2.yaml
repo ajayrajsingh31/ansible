@@ -80,5 +80,5 @@
           sudo apt install docker.io -y
           sudo systemctl start docker
           sudo systemctl enable docker
-          sudo docker run -d --name 2048 -p 8000:8000 ajayrajsingh31/2048:latest
+          sudo docker run -d --name django -p 8000:8000 ajayrajsingh31/django:latest
       register: ec2
